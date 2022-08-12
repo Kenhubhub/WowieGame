@@ -1,4 +1,39 @@
 const PLAYER_RADIUS= 30;
+const v ={
+    x: 0,
+    y: 0
+}
+window.addEventListener("keydown", e =>{
+    console.log(e.key);
+    switch(e.key){
+        case "ArrowDown": 
+                v.x = 0;
+                v.y = 1;
+                break;
+        case "ArrowUp":
+                v.x = 0;
+                v.y = -1;    
+                break;
+        case "ArrowLeft":
+            v.x = -1;
+            v.y = 0;
+            break;
+        case "ArrowRight":
+            v.x = 1;
+            v.y = 0;    
+            break;
+        default:
+                v.x = 0;
+                v.y = 0
+                break;
+
+    }
+})
+window.addEventListener("keyup", e =>{
+    v.x = 0;
+    v.y = 0;
+    console.log("triggerd")
+})
 class Player{
     constructor(x,y,v){
         this.radius = PLAYER_RADIUS;
@@ -7,12 +42,13 @@ class Player{
         this.v = v;
         this.color = color;
     }
-    update(x,y){
-        this.x = this.v.x;
-        this.y = this.v.y;
+    update(v){
+        this.x += v.x;
+        this.y += v.y;
+        
     }
     draw(){
-        console.log("begins"); 
+        
         c.beginPath();
         c.arc(this.x,this.y,this.radius,0,2*Math.PI);
         c.fillStyle = this.color;
@@ -21,5 +57,13 @@ class Player{
     }
 }
 
-let player = new Player(500,500,2);
-player.draw();         
+let player = new Player(500,500,v);
+const animate = ()=>{       
+    requestAnimationFrame(animate);
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    
+    player.update(v);      
+    player.draw();          
+                     
+} 
+animate();      
