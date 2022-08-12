@@ -68,6 +68,8 @@ class Enemy{
             
         }
         
+        
+        
     }
 
 }
@@ -99,15 +101,24 @@ const enemiesUpdate =() =>{
     Enemies.forEach( enemy => {
         enemy.check_collision();
     })
-    //Filter enemies with 
+    //Filter enemies who are dead and remove from array of enemies
     Enemies = Enemies.filter( enemy => {
         
         return enemy.alive;
         
     })
+    //Update every alive enemies position
     Enemies.forEach( enemy =>{
         enemy.update();
-        console.log(enemy.dx,enemy.dy);
+        
+    })
+    //check if enemy has reached player and if true set player.alive = false
+    //can implement a gameover screen from the use of player.alive status.
+    Enemies.forEach( enemy =>{
+        if(distance(player.x,player.y,enemy.x,enemy.y) < PLAYER_RADIUS){
+            player.alive = false;
+            console.log("Game over bitch");
+        }
     })
 
 }

@@ -20,7 +20,7 @@ class Player{
         this.y = y;
         this.v = v;
         this.color = color;
-
+        this.alive = true;
         this.keyUpFlag = true;
 
     }
