@@ -72,7 +72,7 @@ class Player{
         if (offset > 16) {
           offset = 0;
         }
-        c.setLineDash([4, 2]);
+        c.setLineDash([4, 16]);
         c.lineDashOffset = -offset;
         c.stroke();
     }
