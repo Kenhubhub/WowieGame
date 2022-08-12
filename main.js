@@ -10,6 +10,13 @@ window.addEventListener("keyup", e =>{
     console.log("triggerd")
 })
 
+window.addEventListener("click", e => {
+    // through the stick
+    if (stick.state == "inHand") {
+        stick.throw(e.clientX, e.clientY);
+    }
+
+})
 
 function animate() {
     requestAnimationFrame(animate);
@@ -17,6 +24,8 @@ function animate() {
     dog.update();
     player.update();
     player.draw();
+    stick.update()
+;    stick.render();
     
 }
 

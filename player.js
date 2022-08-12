@@ -28,16 +28,6 @@ class Player{
     }
     update(){
 
-        // deccelerate
-        if (this.keyUpFlag == true) {
-            if (Math.abs(this.v.x) > 10) {
-                this.a.x = -this.a.x;
-
-            } else {}
-        }
-
-        this.v.x += this.a.x;
-        this.v.y += this.a.y;
 
         this.x += this.v.x;
         this.y += this.v.y;
