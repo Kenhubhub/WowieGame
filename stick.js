@@ -40,18 +40,30 @@ class Stick{
                 this.x += (xDiff)*THROWING_SPEED;
                 this.y += (yDiff)*THROWING_SPEED;
             }
-            else 
-            {
+            else {
                 this.state = "stationary";
             }
+            // check if dog has it
             break;
 
             case "stationary":
             // if stationary
+                // check if dog has it
+                let dist2 = distance(dog.x, dog.y, this.x, this.y);
+                if (dist2 < dog.r + 20) {
+                    this.state = "inDogsMouth";
+                }
             break;
 
             case "inDogsMouth":
             // if in dogs mouth
+            this.x = dog.x + dog.r-10;
+            this.y = dog.y + dog.r-25;
+            // check if close to player
+            let dist3 = distance(player.x, player.y, this.x, this.y) 
+            if (dist3 < 60) {
+                this.state = "inHand";
+            }
             break;
 
         }

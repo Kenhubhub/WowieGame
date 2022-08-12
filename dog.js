@@ -1,6 +1,6 @@
 const dogRadius= 20;
-const maxDogSpeed = 5;
-const dogAcc = 1;
+const maxDogSpeed = 18;
+const dogAcc = 3;
 
 
 
@@ -51,17 +51,20 @@ class Dog{
 
     update(x,y){
         switch(this.state) {
-            case "human":
             // FOLLOW HUMAN
+            case "human":
             this.followObject(player);
             if (stick.state == "thrown" || stick.state == "stationary") {
-                this.state = stick;
+                this.state = "stick";
             }
             break;
-
-            case "stick":                
+             
             // CHASE STICK
+            case "stick":               
             this.followObject(stick);
+            if (stick.state == "inDogsMouth" || stick.state == "inHand") {
+                this.state = "human";
+            }
             break;
 
         }

@@ -25,8 +25,8 @@ function animate() {
     dog.update();
     player.update();
     player.draw();
-    stick.update()
-;    stick.render();
+    stick.update();
+    stick.render();
     
 }
 
