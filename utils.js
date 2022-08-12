@@ -11,7 +11,7 @@ window.addEventListener("mousemove", e =>{
     mouse.x = e.x;
     mouse.y = e.y;
 })
-const colors = ['#2185C5', '#7ECEFD', '#F006E5', '#FF7F66'];
+const colors = ['#f1c40f', '#f39c12', '#e67e22', '#d35400', '#e74c3c', '#c0392b'];
 const color = colors[Math.floor(Math.random() * colors.length)];
 function distance(x1, y1, x2, y2) {
     const xDist = x2 - x1
