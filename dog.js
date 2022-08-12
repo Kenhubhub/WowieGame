@@ -20,6 +20,8 @@ class Dog{
 
     // follow human
     followHuman() {
+        this.playerx = player.x;
+        this.playery = player.y;
         var xdiff = this.x - this.playerx;
         var ydiff = this.y - this.playery;
 
