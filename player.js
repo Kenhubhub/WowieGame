@@ -75,6 +75,13 @@ class Player{
         c.fillStyle = this.color;
         c.fill();
         c.closePath();
+
+        c.beginPath(); //Begins the process
+        c.moveTo(this.x,this.y); //This sets the start point of the line
+        c.lineTo(mouse.x,mouse.y) // This sets the end point of the line ! The context point
+        //remains at this location.
+        //Now it goes from previous positon to this new position
+        c.stroke();
     }
 
     move(event) {
