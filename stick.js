@@ -50,7 +50,7 @@ class Stick{
             // if stationary
                 // check if dog has it
                 let dist2 = distance(dog.x, dog.y, this.x, this.y);
-                if (dist2 < dog.r + 10) {
+                if (dist2 < dog.r + 20) {
                     this.state = "inDogsMouth";
                 }
             break;

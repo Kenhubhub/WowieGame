@@ -1,6 +1,6 @@
 const dogRadius= 20;
-const maxDogSpeed = 5;
-const dogAcc = 1;
+const maxDogSpeed = 18;
+const dogAcc = 3;
 
 
 
