@@ -1,0 +1,9 @@
+function animate() {
+    requestAnimationFrame(animate);
+    c.clearRect(0,0,innerWidth,innerHeight);
+    dog.update();
+    player.draw();
+    
+}
+
+animate();
