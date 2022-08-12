@@ -1,14 +1,13 @@
 window.addEventListener("keydown", e =>{
     console.log(e.key);
-    if (keysDown.includes(e.key) == false) {
-        keysDown.push(e.key);
-    }
+    player.move(e.key);
+    player.keyUpFlag = false;
 })
 
+
 window.addEventListener("keyup", e =>{
-    var index = keysDown.findIndex(str => {return str == e.key});
-    keysDown.splice(index);
-    console.log("triggerd");
+    player.keyUpFlag = true;
+    console.log("triggerd")
 })
 
 
