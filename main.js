@@ -4,10 +4,11 @@ window.addEventListener("keydown", e =>{
         case "ArrowDown": 
                 v.x = 0;
                 v.y = 1;
-                break;
+                                break;
         case "ArrowUp":
                 v.x = 0;
-                v.y = -1;    
+                v.y = -1;
+                    
                 break;
         case "ArrowLeft":
             v.x = -1;
@@ -23,10 +24,12 @@ window.addEventListener("keydown", e =>{
                 break;
 
     }
+    player.update(v);
 })
 window.addEventListener("keyup", e =>{
     v.x = 0;
     v.y = 0;
+    player.update(v);
     console.log("triggerd")
 })
 
@@ -34,6 +37,7 @@ function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0,0,innerWidth,innerHeight);
     dog.update();
+    
     player.draw();
     
 }
