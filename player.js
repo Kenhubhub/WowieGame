@@ -81,6 +81,12 @@ class Player{
         c.lineTo(mouse.x,mouse.y) // This sets the end point of the line ! The context point
         //remains at this location.
         //Now it goes from previous positon to this new position
+        offset++;
+        if (offset > 16) {
+          offset = 0;
+        }
+        c.setLineDash([4, 2]);
+        c.lineDashOffset = -offset;
         c.stroke();
     }
 

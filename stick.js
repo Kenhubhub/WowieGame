@@ -1,5 +1,5 @@
 const STICK_SIZE = PLAYER_RADIUS/2
-
+let offset = 0;
 class Stick{
     constructor(readyThrow,playerx,playery,x,y){
         this.readyThrow = readyThrow;
