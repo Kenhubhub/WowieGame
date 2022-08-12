@@ -1,9 +1,7 @@
 const PLAYER_RADIUS= 30;
 const PLAYER_SPEED = 1;
-const PLAYER_MAX_SPEED = 5;
 const PLAYER_ACC = 0.1;
-const PLAYER_MAX_ACC = 0.2;
-const PLAYER_STOP = 10;
+
 
 const v ={
     x: 0,
@@ -29,28 +27,6 @@ class Player{
 
     }
     update(){
-        // check vel limit
-        if (this.v.x > PLAYER_MAX_SPEED) {
-            this.v.x = PLAYER_MAX_SPEED;
-        }
-        else if (this.v.x < -PLAYER_MAX_SPEED) {
-            this.v.x = -PLAYER_MAX_SPEED;
-        }
-        if (this.v.y > PLAYER_MAX_SPEED) {
-            this.v.y = PLAYER_MAX_SPEED;
-        }
-        else if (this.v.y < -PLAYER_MAX_SPEED) {
-            this.v.y = -PLAYER_MAX_SPEED;
-        }
-        // check if within bounds
-        if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
-            this.v.x = -this.v.x;
-            
-            console.log("out of bounds")
-        }
-        if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
-            this.v.y = -this.v.y;
-        }
 
         // deccelerate
         if (this.keyUpFlag == true) {
@@ -68,6 +44,17 @@ class Player{
 
         console.log("playerMove-"+this.a.x+"-"+this.v.x+"-"+this.x+this.y)
         
+        // check if within bounds
+        if (this.x + this.radius > innerWidth) {
+            this.x = innerWidth - this.radius;
+        } else if (this.x - this.radius < 0) {
+            this.x = this.radius;
+        }
+        if (this.y + this.radius > innerHeight) {
+            this.y = innerHeight - this.radius;
+        } else if (this.y - this.radius < 0) {
+            this.y = this.radius;
+        }
     }
     draw(){
         c.beginPath();
