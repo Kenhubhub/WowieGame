@@ -1,4 +1,5 @@
 const PLAYER_RADIUS= 30;
+const PLAYER_SPEED = 10;
 const v ={
     x: 0,
     y: 0
@@ -25,6 +26,33 @@ class Player{
         c.fillStyle = this.color;
         c.fill();
         c.closePath();
+    }
+
+    move(event) {
+        switch(event){
+            case "ArrowDown": 
+                    v.x = 0;
+                    v.y = PLAYER_SPEED;
+                                    break;
+            case "ArrowUp":
+                    v.x = 0;
+                    v.y = -PLAYER_SPEED;
+                        
+                    break;
+            case "ArrowLeft":
+                v.x = -PLAYER_SPEED;
+                v.y = 0;
+                break;
+            case "ArrowRight":
+                v.x = PLAYER_SPEED;
+                v.y = 0;    
+                break;
+            default:
+                    v.x = 0;
+                    v.y = 0
+                    break;
+    
+        }
     }
 }
 

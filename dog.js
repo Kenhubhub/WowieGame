@@ -1,4 +1,4 @@
-const dogRadius= 30;
+const dogRadius= 20;
 const maxDogSpeed = 5;
 const dogAcc = 1;
 
