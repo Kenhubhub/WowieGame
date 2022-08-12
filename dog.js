@@ -51,17 +51,20 @@ class Dog{
 
     update(x,y){
         switch(this.state) {
-            case "human":
             // FOLLOW HUMAN
+            case "human":
             this.followObject(player);
             if (stick.state == "thrown" || stick.state == "stationary") {
-                this.state = stick;
+                this.state = "stick";
             }
             break;
-
-            case "stick":                
+             
             // CHASE STICK
+            case "stick":               
             this.followObject(stick);
+            if (stick.state == "inDogsMouth" || stick.state == "inHand") {
+                this.state = "human";
+            }
             break;
 
         }
