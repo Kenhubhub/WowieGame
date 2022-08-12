@@ -6,6 +6,7 @@ const dogAcc = 1;
 
 class Dog{
     constructor(x,y,v){
+        this.state = "stick";
         this.r = dogRadius;
         this.x = x;
         this.y = y;
@@ -14,16 +15,16 @@ class Dog{
         this.color = color;
 
         // player
-        this.playerx = player.x;
-        this.playery = player.y;
+        this.goalx = player.x;
+        this.goaly = player.y;
     }
 
     // follow human
-    followHuman() {
-        this.playerx = player.x;
-        this.playery = player.y;
-        var xdiff = this.x - this.playerx;
-        var ydiff = this.y - this.playery;
+    followObject(object) {
+        this.goalx = object.x;
+        this.goaly = object.y;
+        var xdiff = this.x - this.goalx;
+        var ydiff = this.y - this.goaly;
 
         // X
         if (xdiff > dogRadius) {
@@ -42,18 +43,28 @@ class Dog{
         else if (ydiff < dogRadius) {
             this.dy = dogAcc;
         } else { 
-            this.dy = 0;}
-        // console.log("followHuman: dx = "+this.dx+"  dy = "+this.dy);
+            this.dy = 0;
+        }
+        console.log("followHuman: dx = "+this.dx+"  dy = "+this.dy);
     }
 
 
-
     update(x,y){
-        // follow human
-        this.followHuman();
+        switch(this.state) {
+            case "human":
+            // FOLLOW HUMAN
+            this.followObject(player);
+            if (stick.state == "thrown" || stick.state == "stationary") {
+                this.state = stick;
+            }
+            break;
 
-        // check for max velocity
+            case "stick":                
+            // CHASE STICK
+            this.followObject(stick);
+            break;
 
+        }
 
         // check if within bounds
         if (this.x + this.r > innerWidth || this.x - this.r < 0) {

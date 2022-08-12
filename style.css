@@ -1,2 +1,10 @@
-body {background: #17293a;}
-canvas {display: block;}
+body {
+    background: #17293a;
+    overflow: hidden;
+}
+
+
+canvas {
+    display: block;
+
+}

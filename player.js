@@ -40,13 +40,13 @@ class Player{
             if (keyDown("ArrowRight") == true) {
                 this.v.x = PLAYER_SPEED;
             }
+            //console.log("heheh")
         } 
         if (keysDown.length === 0) {
-            console.log("heheh")
             this.v.x = 0;
             this.v.y = 0;
         }
-        console.log("check1: v.x: "+this.v.x+"  v.y: "+this.v.y+"---"+keysDown.length);
+        console.log("check1: v.x: "+this.v.x+"  v.y: "+this.v.y+"---"+keysDown);
         // add velocity to position
         this.x += this.v.x;
         this.y += this.v.y;
