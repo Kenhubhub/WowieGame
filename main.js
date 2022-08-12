@@ -24,6 +24,11 @@ window.addEventListener("keydown", e =>{
 
     }
 })
+window.addEventListener("keyup", e =>{
+    v.x = 0;
+    v.y = 0;
+    console.log("triggerd")
+})
 
 function animate() {
     requestAnimationFrame(animate);

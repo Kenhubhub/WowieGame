@@ -4,11 +4,7 @@ const v ={
     y: 0
 }
 
-window.addEventListener("keyup", e =>{
-    v.x = 0;
-    v.y = 0;
-    console.log("triggerd")
-})
+
 class Player{
     constructor(x,y,v){
         this.radius = PLAYER_RADIUS;
