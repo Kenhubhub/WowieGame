@@ -43,7 +43,7 @@ class Dog{
             this.dy = dogAcc;
         } else { 
             this.dy = 0;}
-        console.log("followHuman: dx = "+this.dx+"  dy = "+this.dy);
+        // console.log("followHuman: dx = "+this.dx+"  dy = "+this.dy);
     }
 
 
@@ -72,7 +72,7 @@ class Dog{
 
 
     draw(){
-        console.log("dog"); 
+        // console.log("dog"); 
         c.beginPath();
         c.arc(this.x,this.y,this.r,0,2*Math.PI);
         c.fillStyle = "black";

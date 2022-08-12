@@ -1,20 +1,21 @@
 window.addEventListener("keydown", e =>{
     console.log(e.key);
     player.move(e.key);
-    player.update(v);
+    player.keyUpFlag = false;
 })
+
+
 window.addEventListener("keyup", e =>{
-    v.x = 0;
-    v.y = 0;
-    player.update(v);
+    player.keyUpFlag = true;
     console.log("triggerd")
 })
+
 
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0,0,innerWidth,innerHeight);
     dog.update();
-    
+    player.update();
     player.draw();
     
 }
