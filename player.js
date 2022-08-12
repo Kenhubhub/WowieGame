@@ -58,12 +58,4 @@ class Player{
 }
 
 let player = new Player(500,500,v);
-const animate = ()=>{       
-    requestAnimationFrame(animate);
-    c.clearRect(0, 0, canvas.width, canvas.height)
     
-    player.update(v);      
-    player.draw();          
-                     
-} 
-animate();      
