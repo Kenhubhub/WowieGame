@@ -19,3 +19,16 @@ function distance(x1, y1, x2, y2) {
   
     return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
 }
+
+// will hold all the keys currently pressed down
+let keysDown = [];
+
+// function to check if a specific key is in a list
+function keyDown(key) {
+    if (keysDown.includes(key)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
