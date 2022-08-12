@@ -46,7 +46,7 @@ class Player{
             this.v.x = 0;
             this.v.y = 0;
         }
-        console.log("check1: v.x: "+this.v.x+"  v.y: "+this.v.y+"---"+keysDown);
+        // console.log("check1: v.x: "+this.v.x+"  v.y: "+this.v.y+"---"+keysDown);
         // add velocity to position
         this.x += this.v.x;
         this.y += this.v.y;
@@ -77,6 +77,7 @@ class Player{
         c.lineTo(mouse.x,mouse.y) // This sets the end point of the line ! The context point
         //remains at this location.
         //Now it goes from previous positon to this new position
+        c.strokeStyle = this.color;
         offset++;
         if (offset > 16) {
           offset = 0;

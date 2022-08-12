@@ -45,7 +45,7 @@ class Dog{
         } else { 
             this.dy = 0;
         }
-        console.log("followHuman: dx = "+this.dx+"  dy = "+this.dy);
+        // console.log("followHuman: dx = "+this.dx+"  dy = "+this.dy);
     }
 
 

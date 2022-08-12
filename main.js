@@ -18,16 +18,18 @@ window.addEventListener("click", e => {
     }
 
 })
-
+populate(numberEnemies);
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0,0,innerWidth,innerHeight);
+    
     dog.update();
     player.update();
     player.draw();
     stick.update();
     stick.render();
-    
+    enemiesRender();
+    enemiesUpdate();
 }
 
 animate();
