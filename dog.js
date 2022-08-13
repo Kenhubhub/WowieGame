@@ -95,5 +95,8 @@ class Dog{
     }
 }
 
+const dogStartX = 400;
+const dogStartY = 100;
+
 let dog = new Dog(400,100,2);
 

@@ -1,6 +1,6 @@
-
-
-
+    ///////////////////////////////////////////
+    //          EVENT LISTENERS              //
+    //////////////////////////////////////////
 window.addEventListener("keydown", e =>{
     console.log(e.key);
     if (keysDown.includes(e.key) == false) {
@@ -16,25 +16,10 @@ window.addEventListener("keyup", e =>{
 
 window.addEventListener("click", e => {
     console.log("CLICK");
-    if (gameEngine.gameState == "play") {
-        // through the stick
-        if (stick.state == "inHand") {
-            stick.throw(e.clientX, e.clientY);
-        }
-        if (Enemies.length == 0) {
-            gameEngine.gameState = "menu";
-        }
-    }
-    else if (gameEngine.gameState == "menu") {
-        // reset game variables
-        Enemies = []
-        gameEngine.gameState = "play";
-        populate(numberEnemies);
-    }
-    else if (gameEngine.gameState == "backToMenu") {
-        gameEngine.gameState = "menu";
-    } else {gameEngine.gameState = "menu";}
+    gameEngine.stateLogic(e);
 })
+
+
 
 function animate() {
     // different stages: MENU, PLAY, RESPAWN
@@ -43,7 +28,7 @@ function animate() {
     console.log("player.alive "+player.alive)
     switch(gameEngine.gameState) {
         case "menu":
-            player.alive = true;
+            gameEngine.resetGame();
             gameEngine.menu();
             break;
         case "play":

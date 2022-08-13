@@ -88,5 +88,7 @@ class Player{
     }
 }
 
+const playerStartX = 300;
+const playerStartY = 300;
     
 let player = new Player(300,300,v);

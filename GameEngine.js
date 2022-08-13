@@ -11,10 +11,6 @@ class GameEngine {
         stick.update();
     }
 
-    chooseScreen(gameState) {
-
-    }
-
 
     ///////////////////////////////////////////
     //          DIFFERENT SCREENS           //
@@ -56,7 +52,46 @@ class GameEngine {
     }
     
 
+    ///////////////////////////////////////////
+    //              LOGIC                   //
+    //////////////////////////////////////////
+    stateLogic(e) {
+        if (gameEngine.gameState == "play") {
+            // throw the stick
+            if (stick.state == "inHand") {
+                stick.throw(e.clientX, e.clientY);
+            }
+            if (Enemies.length == 0) {
+                gameEngine.gameState = "menu";
+            }
+        }
+        else if (gameEngine.gameState == "menu") {
+            // reset game variables
+            Enemies = []
+            gameEngine.gameState = "play";
+            populate(numberEnemies);
+        }
+        else if (gameEngine.gameState == "backToMenu") {
+            gameEngine.gameState = "menu";
+        } else {gameEngine.gameState = "menu";}
+    }
 
+    ///////////////////////////////////////////
+    //             GAME LOGIC               //
+    //////////////////////////////////////////  
+    resetGame() {
+        // reset enemy list
+        Enemies = [];
+        // reset player, stick and dog coord
+        player.x = playerStartX;
+        player.y = playerStartY;
+        stick.x = player.x;
+        stick.y = player.y;
+        dog.x = dogStartX;
+        dog.y = dogStartY;
+
+        player.alive = true;
+    }  
 }
 
 let gameEngine = new GameEngine();
