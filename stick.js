@@ -95,3 +95,4 @@ class Stick{
 let stick = new Stick(true,player.x,player.y,300,300);
 
 
+

@@ -1,4 +1,4 @@
-let numberEnemies = 10;
+let numberEnemies = 1;
 let ENEMY_RADIUS = 20;
 let ENEMY_ACC = 1;
 const enemy_velocity = {

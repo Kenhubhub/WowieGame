@@ -88,5 +88,5 @@ class Player{
     }
 }
 
-let player = new Player(300,300,v);
     
+let player = new Player(300,300,v);

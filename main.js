@@ -1,3 +1,6 @@
+
+
+
 window.addEventListener("keydown", e =>{
     console.log(e.key);
     if (keysDown.includes(e.key) == false) {
@@ -12,24 +15,51 @@ window.addEventListener("keyup", e =>{
 })
 
 window.addEventListener("click", e => {
-    // through the stick
-    if (stick.state == "inHand") {
-        stick.throw(e.clientX, e.clientY);
+    console.log("CLICK");
+    if (gameEngine.gameState == "play") {
+        // through the stick
+        if (stick.state == "inHand") {
+            stick.throw(e.clientX, e.clientY);
+        }
+        if (Enemies.length == 0) {
+            gameEngine.gameState = "menu";
+        }
     }
-
+    else if (gameEngine.gameState == "menu") {
+        // reset game variables
+        Enemies = []
+        gameEngine.gameState = "play";
+        populate(numberEnemies);
+    }
+    else if (gameEngine.gameState == "backToMenu") {
+        gameEngine.gameState = "menu";
+    } else {gameEngine.gameState = "menu";}
 })
-populate(numberEnemies);
+
 function animate() {
-    requestAnimationFrame(animate);
-    c.clearRect(0,0,innerWidth,innerHeight);
-    
-    dog.update();
-    player.update();
-    player.draw();
-    stick.update();
-    stick.render();
-    enemiesRender();
-    enemiesUpdate();
+    // different stages: MENU, PLAY, RESPAWN
+    requestAnimationFrame(animate)
+    console.log("gameState: "+gameEngine.gameState);
+    console.log("player.alive "+player.alive)
+    switch(gameEngine.gameState) {
+        case "menu":
+            player.alive = true;
+            gameEngine.menu();
+            break;
+        case "play":
+            gameEngine.play();
+            break;
+        case "backToMenu":
+            player.alive = true;
+            gameEngine.backToMenu();
+            break;
+        default:
+            break;
+    } 
 }
+
+
+
+
 
 animate();

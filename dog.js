@@ -96,5 +96,4 @@ class Dog{
 }
 
 let dog = new Dog(400,100,2);
-dog.update();
 
