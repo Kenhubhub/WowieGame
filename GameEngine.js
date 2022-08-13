@@ -24,13 +24,14 @@ class GameEngine {
         stick.render();
         enemiesRender();
         enemiesUpdate();
+        
         if (player.alive == false) {
             this.gameState = "backToMenu"
         }
     }
 
     menu() {
-        console.log("DEADMENU!!");
+        //console.log("DEADMENU!!");
         c.clearRect(0,0,innerWidth,innerHeight);
         c.font = "100px Arial";
         c.fillStyle = "#e1e1e1"
@@ -54,13 +55,13 @@ class GameEngine {
         
         c.fillText("Collaborate with your robot dog to kill enemies", (innerWidth/2)-400,300);
         c.fillText("press anywhere to play", (innerWidth/2)-70,400);
-        console.log("working");
+        //console.log("working");
         //requestAnimationFrame(this.menu.bind(this));
       
     }
     
     backToMenu() {
-        console.log("respawn!!");
+        //console.log("respawn!!");
         c.clearRect(0,0,innerWidth,innerHeight);
         c.font = "50px Arial";
         c.fillStyle = "white"

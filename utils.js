@@ -32,3 +32,64 @@ function keyDown(key) {
         return false;
     }
 }
+
+///----Animation for explosions-----///
+const PARTICLE_SIZE = 5;
+const PARTICLE_SPEED = 1;
+const NUMBER_PARTICLES = 30;
+const particle_velocity = [1,-1]
+const PARTICLE_COLOR = "rgba(255,255,0,0.5)";
+class particle{
+    constructor(x,y,vx,vy){
+        this.x = x;
+        this.y = y;
+        this.color = PARTICLE_COLOR;
+        this.size = PARTICLE_SIZE;
+        this.speed = PARTICLE_SPEED;
+        this.vx = vx;
+        this.vy = vy;
+    }
+    render(){
+        c.beginPath();
+        c.arc(this.x,this.y,PARTICLE_SIZE,0,2*Math.PI);
+        c.shadowColor = "#f50000";
+        c.shadowBlur = 20;
+        c.fillStyle = this.color;
+        c.fill();
+        c.closePath();
+        
+    }
+    update(){
+        this.x += this.speed * this.vx;
+        this.y += this.speed *this.vy;
+    }
+}
+
+class particles {
+    constructor(x,y){
+        this.color = PARTICLE_COLOR;
+        this.batch = [];
+        for(let i = 0 ; i<NUMBER_PARTICLES; i++){
+            let vx = PARTICLE_SPEED * Math.random() - 0.5;
+            let vy = PARTICLE_SPEED * Math.random() - 0.5;
+            let newParticle = new particle(x,y,vx,vy);
+            this.batch.push(newParticle);
+        }
+        this.time = 0;
+    }
+    update(){
+        this.time++;
+        this.batch.forEach( part => {
+            part.update();
+            part.render();
+        })
+    }
+}
+const generate_particles = (x,y,color) => {
+    let particles = [];
+    for(let i = 0; i<NUMBER_PARTICLES; i++){
+        let newParticle = new particle(x,y,color);
+        particles.push(newParticle);
+    }
+    return particles;
+}

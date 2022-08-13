@@ -11,11 +11,11 @@ window.addEventListener("keydown", e =>{
 window.addEventListener("keyup", e =>{
     var index = keysDown.findIndex(str => {return str == e.key});
     keysDown.splice(index);
-    console.log("triggerd");
+    //console.log("triggerd");
 })
 
 window.addEventListener("click", e => {
-    console.log("CLICK");
+    //console.log("CLICK");
     gameEngine.stateLogic(e);
 })
 
@@ -24,8 +24,8 @@ window.addEventListener("click", e => {
 function animate() {
     // different stages: MENU, PLAY, RESPAWN
     requestAnimationFrame(animate)
-    console.log("gameState: "+gameEngine.gameState);
-    console.log("player.alive "+player.alive)
+    //console.log("gameState: "+gameEngine.gameState);
+    //console.log("player.alive "+player.alive)
     switch(gameEngine.gameState) {
         case "menu":
             gameEngine.resetGame();
@@ -33,6 +33,7 @@ function animate() {
             break;
         case "play":
             gameEngine.play();
+           
             break;
         case "backToMenu":
             player.alive = true;

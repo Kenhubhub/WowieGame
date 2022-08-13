@@ -1,6 +1,7 @@
 let numberEnemies = 1;
 let ENEMY_RADIUS = 20;
 let ENEMY_ACC = 1;
+const ENEMY_COLOR = "#ff0000"
 const enemy_velocity = {
     x:2,
     y:2
@@ -15,13 +16,14 @@ class Enemy{
         this.alive = true;
         this.goalx = player.x;
         this.goaly = player.y;
+        this.color = ENEMY_COLOR
         
     }
     render(){
         
         c.beginPath();
         c.arc(this.x,this.y,ENEMY_RADIUS,0,2*Math.PI);
-        c.fillStyle = "#ff0000";
+        c.fillStyle = this.color;
         c.shadowColor = "#f50000";
         c.shadowBlur = 20;
         c.fill();
@@ -30,6 +32,7 @@ class Enemy{
     check_collision(){
         if(distance(dog.x,dog.y,this.x,this.y) < 30){
             this.alive = false;
+            death_animation(this.color,this.x,this.y);
         }
     }
     followObject() {
@@ -97,11 +100,16 @@ const enemiesRender = () =>{
 
 //update
     //checks life of each enemy and collision with either 
+let death_particles = []
+let DEPRECATION_FRAMES = 700;
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
     
     Enemies.forEach( enemy => {
         enemy.check_collision();
+        if(!enemy.alive){
+            death_particles.push(new particles(enemy.x,enemy.y));
+        }
     })
     //Filter enemies who are dead and remove from array of enemies
     Enemies = Enemies.filter( enemy => {
@@ -113,6 +121,14 @@ const enemiesUpdate =() =>{
     Enemies.forEach( enemy =>{
         enemy.update();
         
+    })
+    //Update particles spawned from death
+    death_particles.forEach( batch =>{
+        batch.update();
+    })
+    //If particles have been travlling for 5 frames then remove
+    death_particles = death_particles.filter( batch=>{
+        return !(batch.time==DEPRECATION_FRAMES)
     })
     //check if enemy has reached player and if true set player.alive = false
     //can implement a gameover screen from the use of player.alive status.
