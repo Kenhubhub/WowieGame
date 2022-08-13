@@ -1,4 +1,4 @@
-let numberEnemies = 1;
+let numberEnemies = 10;
 let ENEMY_RADIUS = 20;
 let ENEMY_ACC = 1;
 const ENEMY_COLOR = "#ff0000"
@@ -101,7 +101,7 @@ const enemiesRender = () =>{
 //update
     //checks life of each enemy and collision with either 
 let death_particles = []
-let DEPRECATION_FRAMES = 700;
+let DEPRECATION_FRAMES = 200;
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
     
