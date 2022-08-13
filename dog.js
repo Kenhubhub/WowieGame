@@ -90,6 +90,8 @@ class Dog{
         c.beginPath();
         c.arc(this.x,this.y,this.r,0,2*Math.PI);
         c.fillStyle = "black";
+        c.shadowColor = "#0000f5";
+        c.shadowBlur = 20;
         c.fill();
         c.closePath();
     }

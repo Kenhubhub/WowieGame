@@ -1,7 +1,7 @@
 class GameEngine {
     constructor() {
         this.gameState = "menu";
-
+        this.flash = true;
         populate(numberEnemies);
     }
 
@@ -33,11 +33,30 @@ class GameEngine {
         console.log("DEADMENU!!");
         c.clearRect(0,0,innerWidth,innerHeight);
         c.font = "100px Arial";
-        c.fillStyle = "white"
-        c.fillText("DOG BONER", (innerWidth/2)-400,200);
+        c.fillStyle = "#e1e1e1"
+        // setInterval(()=>{
+        //     if(this.flash){
+        //         console.log("")
+        //         
+        //         c.shadowBlur = 0;
+                
+                
+        //         this.flash = false;
+        //     }else{
+        //     }
+            
+        // },200)
+        c.shadowColor = "#f5f200";
+        c.shadowBlur = 50;
+        this.flash= true;
+        c.fillText("FETCH", (innerWidth/2)-400,200);
         c.font = "30px Arial";
-        c.fillStyle = "white"
+        
+        c.fillText("Collaborate with your robot dog to kill enemies", (innerWidth/2)-400,300);
         c.fillText("press anywhere to play", (innerWidth/2)-70,400);
+        console.log("working");
+        //requestAnimationFrame(this.menu.bind(this));
+      
     }
     
     backToMenu() {
@@ -45,10 +64,10 @@ class GameEngine {
         c.clearRect(0,0,innerWidth,innerHeight);
         c.font = "50px Arial";
         c.fillStyle = "white"
-        c.fillText("DOG BONER Casuality", (innerWidth/2)-400,200);
+        c.fillText("GAME OVER", (innerWidth/2)-400,200);
         c.font = "30px Arial";
         c.fillStyle = "white"
-        c.fillText("return to menu looser", (innerWidth/2)-70,400);
+        c.fillText("press anywhere to return to menu", (innerWidth/2)-70,400);
     }
     
 

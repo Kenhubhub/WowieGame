@@ -22,6 +22,8 @@ class Enemy{
         c.beginPath();
         c.arc(this.x,this.y,ENEMY_RADIUS,0,2*Math.PI);
         c.fillStyle = "#ff0000";
+        c.shadowColor = "#f50000";
+        c.shadowBlur = 20;
         c.fill();
         c.closePath();
     }
