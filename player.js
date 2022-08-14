@@ -1,5 +1,6 @@
 const PLAYER_RADIUS= 30;
 const PLAYER_SPEED = 2;
+const PLAYER_ACC = 10;
 
 
 const v ={
@@ -22,6 +23,9 @@ class Player{
         this.color = color;
         this.alive = true;
         this.notMovingFlag = true;
+
+        // for jump to dog
+        // charge
 
     }
     update(){
@@ -63,6 +67,52 @@ class Player{
             this.v.x = 0;
             this.v.y = 0;
         }
+
+        // check if grappling
+        if (grapple.grappling == true) {
+            this.goalx = dog.x;
+            this.goaly = dog.y;
+            var xdiff = Math.abs(this.x - this.goalx);
+            var ydiff = Math.abs(this.y - this.goaly);
+
+            // ratios between x and y distances to goal
+            var xratio = 1;
+            var yratio = 1;
+
+            if(xdiff < ydiff){
+                xratio = xdiff / ydiff;
+            }
+            else if(ydiff < xdiff){
+                yratio = ydiff / xdiff;
+            }
+
+            // X
+            if ((this.goalx < this.x) && (xdiff > this.radius)) {
+                this.v.x = -PLAYER_ACC;
+                this.floatingxpos += this.v.x*xratio;
+            }
+            else if ((this.goalx > this.x) && (xdiff > this.radius)) {
+                this.v.x = PLAYER_ACC;
+                this.floatingxpos += this.v.x*xratio;
+            } else {
+            this.dx = 0
+            }
+
+            // Y
+            if ((this.goaly < this.y) && (ydiff > dogRadius)) {
+                this.v.y = -PLAYER_ACC;
+                this.floatingypos += this.v.y*yratio;
+            }
+            else if ((this.goaly > this.y) && (ydiff > dogRadius)) {
+                this.v.y = PLAYER_ACC;
+                this.floatingypos += this.v.y*yratio;
+            } else { 
+                this.v.y = 0;
+            }
+
+        }
+
+
         // console.log("check1: v.x: "+this.v.x+"  v.y: "+this.v.y+"---"+keysDown);
         // add velocity to position
         this.x += this.v.x;
@@ -81,8 +131,11 @@ class Player{
         } else if (this.y - this.radius < 0) {
             this.y = this.radius;
         }
+
     }
+
     draw(){
+        c.lineWidth = 2;
         c.beginPath();
         c.arc(this.x,this.y,this.radius,0,2*Math.PI);
         c.fillStyle = this.color;

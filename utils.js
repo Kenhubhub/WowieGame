@@ -25,7 +25,8 @@ let keysDown = {
     W: false,
     A: false,
     S: false,
-    D: false
+    D: false,
+    SPACE: false
 };
 
 // function to check if a specific key is in a list

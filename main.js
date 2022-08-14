@@ -14,6 +14,9 @@ window.addEventListener("keydown", e =>{
     }
     else if (e.key == "d") {
         keysDown.D = true;
+    } 
+    else if (e.key == " ") {
+        keysDown.SPACE = true;
     }
 })
 
@@ -29,6 +32,9 @@ window.addEventListener("keyup", e =>{
     }
     else if (e.key == "d") {
         keysDown.D = false;
+    }
+    else if (e.key == " ") {
+        keysDown.SPACE = false;
     }
     //console.log("triggerd");
 })
@@ -61,7 +67,7 @@ function animate() {
         default:
             break;
     } 
-    console.log("keysDown: "+"w: "+keysDown.W+" a: "+keysDown.A+" s: "+keysDown.S+" d: "+keysDown.D);
+    console.log("keysDown: "+"w: "+keysDown.W+" a: "+keysDown.A+" s: "+keysDown.S+" d: "+keysDown.D+" space: "+keysDown.SPACE);
 }
 
 
