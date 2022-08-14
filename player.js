@@ -1,5 +1,5 @@
 const PLAYER_RADIUS= 30;
-const PLAYER_SPEED = 2;
+var PLAYER_SPEED = 2;
 const PLAYER_ACC = 10;
 
 
@@ -25,6 +25,8 @@ class Player{
         this.notMovingFlag = true;
 
         // for jump to dog
+        this.floatingxpos = x;
+        this.floatingypos = y;
         // charge
 
     }
@@ -33,9 +35,11 @@ class Player{
         if (keysDown.W == true || keysDown.S == true) {
             if (keysDown.W == true){
                 this.v.y = -PLAYER_SPEED;
+                this.floatingypos += this.v.y;
             }
             if (keysDown.S == true){
                 this.v.y = PLAYER_SPEED;
+                this.floatingypos += this.v.y;
             }
             this.notMovingFlag = false;
         }
@@ -49,9 +53,11 @@ class Player{
         if (keysDown.A == true || keysDown.D == true) {
             if (keysDown.A == true){
                 this.v.x = -PLAYER_SPEED;
+                this.floatingxpos += this.v.x;
             }
             if (keysDown.D == true){
                 this.v.x = PLAYER_SPEED;
+                this.floatingxpos += this.v.x;
             }
             this.notMovingFlag = false;
         }
@@ -70,6 +76,8 @@ class Player{
 
         // check if grappling
         if (grapple.grappling == true) {
+            PLAYER_SPEED = 5;   // delete this to revert grappling swing changes
+            
             this.goalx = dog.x;
             this.goaly = dog.y;
             var xdiff = Math.abs(this.x - this.goalx);
@@ -111,12 +119,17 @@ class Player{
             }
 
         }
+        else { // delete this to revert grappling swing changes
+            PLAYER_SPEED = 2;
+        }
 
 
         // console.log("check1: v.x: "+this.v.x+"  v.y: "+this.v.y+"---"+keysDown);
         // add velocity to position
-        this.x += this.v.x;
-        this.y += this.v.y;
+        //this.x += this.v.x;
+        //this.y += this.v.y;
+        this.x = Math.floor(this.floatingxpos);
+        this.y = Math.floor(this.floatingypos);
 
 
         
