@@ -101,7 +101,7 @@ const enemiesRender = () =>{
 //update
     //checks life of each enemy and collision with either 
 let death_particles = []
-let DEPRECATION_FRAMES = 200;
+let DEPRECATION_FRAMES = 100;
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
     

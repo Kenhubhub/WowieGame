@@ -10,7 +10,7 @@ window.addEventListener("keydown", e =>{
 
 window.addEventListener("keyup", e =>{
     var index = keysDown.findIndex(str => {return str == e.key});
-    keysDown.splice(index);
+    keysDown.splice(index, 1);
     //console.log("triggerd");
 })
 
