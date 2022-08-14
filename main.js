@@ -2,15 +2,34 @@
     //          EVENT LISTENERS              //
     //////////////////////////////////////////
 window.addEventListener("keydown", e =>{
-    console.log(e.key);
-    if (keysDown.includes(e.key) == false) {
-        keysDown.push(e.key);
+    // console.log(e.key);
+    if (e.key == "w") {
+        keysDown.W = true;
+    }
+    else if (e.key == "a") {
+        keysDown.A = true;
+    }
+    else if (e.key == "s") {
+        keysDown.S = true;
+    }
+    else if (e.key == "d") {
+        keysDown.D = true;
     }
 })
 
 window.addEventListener("keyup", e =>{
-    var index = keysDown.findIndex(str => {return str == e.key});
-    keysDown.splice(index, 1);
+    if (e.key == "w") {
+        keysDown.W = false;
+    }
+    else if (e.key == "a") {
+        keysDown.A = false;
+    }
+    else if (e.key == "s") {
+        keysDown.S = false;
+    }
+    else if (e.key == "d") {
+        keysDown.D = false;
+    }
     //console.log("triggerd");
 })
 
@@ -42,6 +61,7 @@ function animate() {
         default:
             break;
     } 
+    console.log("keysDown: "+"w: "+keysDown.W+" a: "+keysDown.A+" s: "+keysDown.S+" d: "+keysDown.D);
 }
 
 

@@ -21,28 +21,29 @@ class Player{
         this.v = v;
         this.color = color;
         this.alive = true;
-        this.keyUpFlag = true;
+        this.notMovingFlag = true;
 
     }
     update(){
-
-        // check key presses
-        if (keysDown.length > 0) {
-            if (keyDown("ArrowDown") == true) {
-                this.v.y = PLAYER_SPEED;
-            }
-            if (keyDown("ArrowUp") == true) {
-                this.v.y = -PLAYER_SPEED;
-            }
-            if (keyDown("ArrowLeft") == true) {
-                this.v.x = -PLAYER_SPEED;
-            }
-            if (keyDown("ArrowRight") == true) {
-                this.v.x = PLAYER_SPEED;
-            }
-            //console.log("heheh")
-        } 
-        if (keysDown.length === 0) {
+        this.notMovingFlag = true;
+        if (keysDown.W == true) {
+            this.v.y = -PLAYER_SPEED;
+            this.notMovingFlag = false;
+        }
+        if (keysDown.S == true) {
+            this.v.y = PLAYER_SPEED;
+            this.notMovingFlag = false;
+        }
+        if (keysDown.A == true) {
+            this.v.x = -PLAYER_SPEED;
+            this.notMovingFlag = false;
+        }
+        if (keysDown.D == true) {
+            this.v.x = PLAYER_SPEED;
+            this.notMovingFlag = false;
+        }
+        
+        if (this.notMovingFlag == true) {
             this.v.x = 0;
             this.v.y = 0;
         }

@@ -21,16 +21,16 @@ function distance(x1, y1, x2, y2) {
 }
 
 // will hold all the keys currently pressed down
-let keysDown = [];
+let keysDown = {
+    W: false,
+    A: false,
+    S: false,
+    D: false
+};
 
 // function to check if a specific key is in a list
 function keyDown(key) {
-    if (keysDown.includes(key)){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return keysDown[key];
 }
 
 ///----Animation for explosions-----///
