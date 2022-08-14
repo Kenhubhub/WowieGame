@@ -36,7 +36,7 @@ function keyDown(key) {
 ///----Animation for explosions-----///
 const PARTICLE_SIZE = 5;
 const PARTICLE_SPEED = 1;
-const NUMBER_PARTICLES = 30;
+const NUMBER_PARTICLES = 10;
 const particle_velocity = [1,-1]
 const PARTICLE_COLOR = "rgba(255,255,0,0.5)";
 class particle{
