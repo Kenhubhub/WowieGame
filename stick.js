@@ -53,6 +53,10 @@ class Stick{
                 if (dist2 < dog.r + 20) {
                     this.state = "inDogsMouth";
                 }
+                let distToPlayer = distance(this.x, this.y, player.x, player.y)
+                if (distToPlayer < player.radius + 20) {
+                    this.state = "inHand"
+                }
             break;
 
             case "inDogsMouth":
@@ -64,6 +68,7 @@ class Stick{
             if (dist3 < 60) {
                 this.state = "inHand";
             }
+            
             break;
 
         }
