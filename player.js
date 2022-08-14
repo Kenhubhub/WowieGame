@@ -26,22 +26,38 @@ class Player{
     }
     update(){
         this.notMovingFlag = true;
-        if (keysDown.W == true) {
-            this.v.y = -PLAYER_SPEED;
+        if (keysDown.W == true || keysDown.S == true) {
+            if (keysDown.W == true){
+                this.v.y = -PLAYER_SPEED;
+            }
+            if (keysDown.S == true){
+                this.v.y = PLAYER_SPEED;
+            }
             this.notMovingFlag = false;
         }
-        if (keysDown.S == true) {
+        else {
+            this.v.y = 0;
+        }
+        /*if (keysDown.S == true) {
             this.v.y = PLAYER_SPEED;
             this.notMovingFlag = false;
-        }
-        if (keysDown.A == true) {
-            this.v.x = -PLAYER_SPEED;
+        }*/
+        if (keysDown.A == true || keysDown.D == true) {
+            if (keysDown.A == true){
+                this.v.x = -PLAYER_SPEED;
+            }
+            if (keysDown.D == true){
+                this.v.x = PLAYER_SPEED;
+            }
             this.notMovingFlag = false;
         }
-        if (keysDown.D == true) {
+        else {
+            this.v.x = 0;
+        }
+        /*if (keysDown.D == true) {
             this.v.x = PLAYER_SPEED;
             this.notMovingFlag = false;
-        }
+        }*/
         
         if (this.notMovingFlag == true) {
             this.v.x = 0;
