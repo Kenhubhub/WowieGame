@@ -197,7 +197,7 @@ const enemiesRender = () =>{
     })
 }
 const add_newEnemy = (number)=>{
-    for(let i = 0 ; i < enemytrack;i++){
+    for(let i = 0 ; i < number;i++){
         let type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
         let newEnemy = type;
         Enemies.push(newEnemy);
@@ -216,7 +216,8 @@ const enemiesUpdate =() =>{
     //check if dog has hit enemy
     if(Enemies.length == 0){
         populate(numberEnemies+=1);
-        add_newEnemy(enemytrack)
+        add_newEnemy(numberEnemies);
+
     }
     //add a random enemy
     
