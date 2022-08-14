@@ -2,6 +2,8 @@ let numberEnemies = 10;
 let ENEMY_RADIUS = 20;
 let ENEMY_ACC = 1;
 const ENEMY_COLOR = "#ff0000"
+const enemyKilledScore = 100;
+
 const enemy_velocity = {
     x:2,
     y:2
@@ -128,6 +130,10 @@ const enemiesUpdate =() =>{
         enemy.check_collision();
         if(!enemy.alive){
             death_particles.push(new particles(enemy.x,enemy.y));
+            gameEngine.score += enemyKilledScore;
+            c.font = "40px Arial";
+            c.fillStyle = "orange";
+            c.fillText("+100 ",enemy.x, enemy.y - 40);
         }
     })
     //Filter enemies who are dead and remove from array of enemies

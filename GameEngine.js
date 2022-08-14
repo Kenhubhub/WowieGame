@@ -2,6 +2,8 @@ class GameEngine {
     constructor() {
         this.gameState = "menu";
         this.flash = true;
+        this.score = 0;
+        this.highScore = 0;
         populate(numberEnemies);
     }
 
@@ -67,7 +69,18 @@ class GameEngine {
         c.fillStyle = "white"
         c.fillText("GAME OVER", (innerWidth/2)-400,200);
         c.font = "30px Arial";
-        c.fillStyle = "white"
+        c.fillStyle = "white";
+        if (this.score >= this.highScore) {
+            this.highScore = this.score;
+            c.font = "40px Arial";
+            c.fillStyle = "orange";
+            c.fillText("NEW HIGHSCORE: "+this.highScore.toString(), (innerWidth/2)-70,300);
+        } else {
+            c.fillText("SCORE: "+this.score.toString(), (innerWidth/2)-100,330);
+            c.fillText("HIGHSCORE: "+this.highScore.toString(), (innerWidth/2)-130,360);
+        }
+        c.font = "30px Arial";
+        c.fillStyle = "white";
         c.fillText("press anywhere to return to menu", (innerWidth/2)-70,400);
     }
     
@@ -82,7 +95,7 @@ class GameEngine {
                 stick.throw(e.clientX, e.clientY);
             }
             if (Enemies.length == 0) {
-                gameEngine.gameState = "menu";
+                gameEngine.gameState = "backToMenu";
             }
         }
         else if (gameEngine.gameState == "menu") {
