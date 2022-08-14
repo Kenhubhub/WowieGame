@@ -81,8 +81,12 @@ class Enemy{
 let Enemies = [];
 const populate = (numberEnemies) => {
     for(let i = 0 ; i< numberEnemies; i++){
-        let x = Math.random() * innerWidth;
-        let y = Math.random() * innerHeight;
+        let x = player.x;
+        let y = player.y;
+        while((x < player.x+100 && x > player.x-100) && (y < player.y+100 && y > player.y-100)){
+            x = Math.random() * innerWidth;
+            y = Math.random() * innerHeight;
+        }
         let newEnemy = new Enemy(x,y,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y);
         Enemies.push(newEnemy);
     }
