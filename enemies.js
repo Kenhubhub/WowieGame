@@ -1,4 +1,4 @@
-let numberEnemies = 10;
+let numberEnemies = 5;
 let ENEMY_RADIUS = 20;
 let ENEMY_ACC = 1;
 const ENEMY_COLOR = "#ff0000"
@@ -127,7 +127,9 @@ let deadScore = [];
 
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
-    
+    if(Enemies.length == 0){
+        populate(numberEnemies+=5);
+    }
     Enemies.forEach( enemy => {
         enemy.check_collision();
         if(!enemy.alive){

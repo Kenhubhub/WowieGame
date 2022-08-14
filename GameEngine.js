@@ -36,6 +36,7 @@ class GameEngine {
         }
 
         if (player.alive == false) {
+            numberEnemies = 5;
             this.gameState = "backToMenu"
         }
         
