@@ -31,6 +31,10 @@ class GameEngine {
         c.fillStyle = "orange";
         c.fillText("SCORE: "+this.score.toString(), 50,50);
 
+        for (let x of deadScore) {
+            x.update();
+        }
+
         if (player.alive == false) {
             this.gameState = "backToMenu"
         }

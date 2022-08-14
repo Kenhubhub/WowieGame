@@ -123,6 +123,8 @@ const enemiesRender = () =>{
     //checks life of each enemy and collision with either 
 let death_particles = []
 let DEPRECATION_FRAMES = 20;
+let deadScore = [];
+
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
     
@@ -131,9 +133,8 @@ const enemiesUpdate =() =>{
         if(!enemy.alive){
             death_particles.push(new particles(enemy.x,enemy.y));
             gameEngine.score += enemyKilledScore;
-            c.font = "40px Arial";
-            c.fillStyle = "orange";
-            c.fillText("+100 ",enemy.x, enemy.y - 40);
+            let score = new Score(enemyKilledScore,enemy.x, enemy.y);
+            deadScore.push(score);
         }
     })
     //Filter enemies who are dead and remove from array of enemies
