@@ -141,6 +141,31 @@ class growBoy extends Enemy{
         }
     }
 }
+class kamikazeBoy extends Enemy{
+    constructor(x,y,size,vx,vy){
+        super(x,y,size,vx,vy);
+        while((this.x < player.x+100 && this.x > player.x-100) && (this.y < player.y+100 && this.y > player.y-100)){
+            this.x = Math.random() * innerWidth;
+            this.y = Math.random() * innerHeight;
+        }
+        this.size = size/2;
+        this.vx = PARTICLE_SPEED * Math.random() - 0.5;
+        this.vy = PARTICLE_SPEED * Math.random() - 0.5;
+        this.clock = 0;
+        this.type="growboy";
+        this.color = "green";
+    }
+    update(){
+        if(this.clock == 600){
+            this.alive = false;
+        }
+        this.clock++;
+        this.x+=this.vx*5;
+        this.y += this.vy*5;
+
+    }
+
+}
 let enemytrack = 3;
 //const enemyTypes = ["growBoy","bigBoy","speedBoy"];
 const enemyTypes = [new growBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y),
@@ -208,8 +233,8 @@ const enemiesUpdate =() =>{
             }
             if(enemy.type == "bigboy"){
                 for(let i = 0 ; i<enemy.special;i++){
-                    let children = new speedBoy(enemy.x + BIG_RADIUS ,enemy.y+ BIG_RADIUS,ENEMY_RADIUS,enemy.vx * Math.random(),enemy.vy*Math.random());
-                    children.color="blue";
+                    let children = new kamikazeBoy(enemy.x + BIG_RADIUS ,enemy.y+ BIG_RADIUS,ENEMY_RADIUS,enemy.vx * Math.random(),enemy.vy*Math.random());
+                    
                     Enemies.push(children);
                     console.log("spawned children");
                 }
@@ -241,6 +266,7 @@ const enemiesUpdate =() =>{
     Enemies.forEach( enemy =>{
         if(distance(player.x,player.y,enemy.x,enemy.y) < PLAYER_RADIUS){
             player.alive = false;
+            
             console.log("Game over bitch");
         }
     })
