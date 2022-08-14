@@ -27,9 +27,14 @@ class GameEngine {
         enemiesRender();
         enemiesUpdate();
         
+        c.font = "30px Arial";
+        c.fillStyle = "orange";
+        c.fillText("SCORE: "+this.score.toString(), 50,50);
+
         if (player.alive == false) {
             this.gameState = "backToMenu"
         }
+        
     }
 
     menu() {
@@ -101,6 +106,7 @@ class GameEngine {
         else if (gameEngine.gameState == "menu") {
             // reset game variables
             Enemies = []
+            gameEngine.score = 0;
             gameEngine.gameState = "play";
             populate(numberEnemies);
         }
