@@ -27,6 +27,9 @@ class GameEngine {
         grapple.draw();
         enemiesRender();
         enemiesUpdate();
+        powerUps.forEach( powerUp => {
+            powerUp.update();
+        })
         
         c.font = "30px Arial";
         c.fillStyle = "orange";

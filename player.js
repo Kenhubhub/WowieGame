@@ -1,5 +1,4 @@
 const PLAYER_RADIUS= 30;
-var PLAYER_SPEED = 2;
 const PLAYER_ACC = 10;
 
 
@@ -24,21 +23,62 @@ class Player{
         this.alive = true;
         this.notMovingFlag = true;
 
+        this.BASE_SPEED = 4;
+        this.PLAYER_SPEED = this.BASE_SPEED;
+
+        
+
         // for jump to dog
         this.floatingxpos = x;
         this.floatingypos = y;
-        // charge
+        // powerups
+        this.powerUps = [];
 
     }
     update(){
+        // POWERUPS
+        for (let x of powerUps) {
+            console.log("collected: " + x.collected)
+            if (x.collected == true) {
+                
+                this.powerUps.push(x);
+                powerUps.pop()
+            }
+        }
+        console.log("player.powerUps: "+this.powerUps.length)
+        // count up
+        // speed powerUp
+        for (let x of this.powerUps) {
+            // speed
+            if (x.type = "speed") {
+                this.PLAYER_SPEED = 7;
+                x.counter += 1;
+                console.log("speed!!!!!")
+            }
+        }
+        for (let x of this.powerUps) {
+            // speed
+            console.log("x.counter: "+x.counter.toString())
+            if (x.counter > 1000) {
+                this.powerUps.pop();
+                console.log("nospeed!!!!!")
+                this.PLAYER_SPEED = this.BASE_SPEED;
+            }
+        }
+
+        // console.log("powerUpsCounter: "+this.powerUps[0].counter.toString())
+        // remove powerUp after certain time
+
+
+
         this.notMovingFlag = true;
         if (keysDown.W == true || keysDown.S == true) {
             if (keysDown.W == true){
-                this.v.y = -PLAYER_SPEED;
+                this.v.y = -this.PLAYER_SPEED;
                 this.floatingypos += this.v.y;
             }
             if (keysDown.S == true){
-                this.v.y = PLAYER_SPEED;
+                this.v.y = this.PLAYER_SPEED;
                 this.floatingypos += this.v.y;
             }
             this.notMovingFlag = false;
@@ -52,11 +92,11 @@ class Player{
         }*/
         if (keysDown.A == true || keysDown.D == true) {
             if (keysDown.A == true){
-                this.v.x = -PLAYER_SPEED;
+                this.v.x = -this.PLAYER_SPEED;
                 this.floatingxpos += this.v.x;
             }
             if (keysDown.D == true){
-                this.v.x = PLAYER_SPEED;
+                this.v.x = this.PLAYER_SPEED;
                 this.floatingxpos += this.v.x;
             }
             this.notMovingFlag = false;
@@ -76,7 +116,7 @@ class Player{
 
         // check if grappling
         if (grapple.grappling == true) {
-            PLAYER_SPEED = 5;   // delete this to revert grappling swing changes
+            this.PLAYER_SPEED = this.BASE_SPEED;   // delete this to revert grappling swing changes
             
             this.goalx = dog.x;
             this.goaly = dog.y;
@@ -120,7 +160,7 @@ class Player{
 
         }
         else { // delete this to revert grappling swing changes
-            PLAYER_SPEED = 2;
+            this.PLAYER_SPEED = 5;
         }
 
 
@@ -131,6 +171,8 @@ class Player{
         this.x = Math.floor(this.floatingxpos);
         this.y = Math.floor(this.floatingypos);
 
+
+        
 
         
         // check if within bounds
@@ -144,7 +186,10 @@ class Player{
         } else if (this.y - this.radius < 0) {
             this.y = this.radius;
         }
-
+        
+        this.powerUps.forEach( powerUp => {
+            powerUp.update();
+        })
     }
 
     draw(){

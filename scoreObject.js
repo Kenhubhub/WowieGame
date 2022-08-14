@@ -1,4 +1,4 @@
-const timeToDelete = 100;
+const timeToDelete = 10;
 
 class Score {
     constructor(points,x,y) {
@@ -17,7 +17,7 @@ class Score {
 
     update() {
         this.y += 3;
-        if (this.y > this.ogy +timeToDelete) {
+        if (this.y < this.ogy + timeToDelete) {
             this.delete = true;
         }
         this.draw();
