@@ -32,6 +32,7 @@ class GameEngine {
         c.fillText("SCORE: "+this.score.toString(), 50,50);
 
         if (player.alive == false) {
+            numberEnemies = 5;
             this.gameState = "backToMenu"
         }
         
