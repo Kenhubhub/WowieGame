@@ -105,18 +105,45 @@ class bigBoy extends Enemy{
         this.type="bigboy";
         this.special = 5;
     }
+
+}
+class speedBoy extends Enemy{
+    constructor(x,y,size,vx,vy){
+        super(x,y,size,vx,vy);
+        this.size = size/2;
+        this.vx = 5*this.vx;
+        this.vy = 5*this.vy;
+        this.type="speedboy";
+        this.color = "grey";
+    }
+}
+
+class growBoy extends Enemy{
+    constructor(x,y,size,vx,vy){
+        super(x,y,size,vx,vy);
+        this.size = size/2;
+        this.vx = 2*this.vx;
+        this.vy = 2*this.vy;
+        this.type="speedboy";
+        this.color = "purple"
+        this.sizeIncrement = 5;
+    }
     update(){
+        this.size += this.sizeIncrement;
         this.followObject();
         if(this.alive){
             this.x = Math.floor(this.floatingxpos);
             this.y = Math.floor(this.floatingypos);
             
         }
-        
-        
-        
     }
 }
+let enemytrack = 1;
+//const enemyTypes = ["growBoy","bigBoy","speedBoy"];
+const enemyTypes = [new growBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y),
+    new bigBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y),
+    new speedBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y)];
+
 const populate = (numberEnemies) => {
     for(let i = 0 ; i< numberEnemies; i++){
         let x = player.x;
@@ -127,6 +154,13 @@ const populate = (numberEnemies) => {
         }
         let newEnemy = new Enemy(x,y,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y);
         Enemies.push(newEnemy);
+    }
+    for(let i = 0 ; i < enemytrack;i++){
+        let type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+        let newEnemy = type;
+        console.log("chimibanga",typeof newEnemy);
+        Enemies.push(newEnemy);
+
     }
 }
 //renders array of enemies
@@ -142,6 +176,7 @@ const enemiesRender = () =>{
 
 //update
     //checks life of each enemy and collision with either 
+
 let death_particles = []
 let DEPRECATION_FRAMES = 20;
 let deadScore = [];
@@ -149,8 +184,11 @@ let bossCount = 0;
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
     if(Enemies.length == 0){
+        enemytrack++;
         populate(numberEnemies+=5);
     }
+    //add a random enemy
+  
     Enemies.forEach( enemy => {
         enemy.check_collision();
         if(!enemy.alive){
