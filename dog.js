@@ -68,15 +68,13 @@ class Dog{
             break;
 
         }
-
+        
         // check if within bounds
-        if (this.x + this.r > innerWidth || this.x - this.r < 0) {
-            this.dx = -this.dx;
+        if (this.x > innerWidth + dogRadius|| this.x < 0 || this.y> innerHeight || this.y < 0) {
+            this.x = innerWidth/2;
+            this.y = innerHeight/2;
         }
-        if (this.y + this.r > innerHeight || this.y - this.r < 0) {
-            this.dy = -this.dy;
-        }
-    
+        
         this.x += this.dx;
         this.y += this.dy;
 
