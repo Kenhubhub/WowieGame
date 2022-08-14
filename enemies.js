@@ -1,4 +1,4 @@
-let numberEnemies = 5;
+let numberEnemies = 2;
 let ENEMY_RADIUS = 20;
 let ENEMY_ACC = 1;
 const ENEMY_COLOR = "#ff0000"
@@ -34,7 +34,7 @@ class Enemy{
         c.closePath();
     }
     check_collision(){
-        if(distance(dog.x,dog.y,this.x,this.y) < 30){
+        if(distance(dog.x,dog.y,this.x,this.y) < this.size){
             this.alive = false;
             
         }
@@ -111,8 +111,8 @@ class speedBoy extends Enemy{
     constructor(x,y,size,vx,vy){
         super(x,y,size,vx,vy);
         this.size = size/2;
-        this.vx = 5*this.vx;
-        this.vy = 5*this.vy;
+        this.vx = 20*this.vx;
+        this.vy = 20*this.vy;
         this.type="speedboy";
         this.color = "grey";
     }
@@ -122,14 +122,17 @@ class growBoy extends Enemy{
     constructor(x,y,size,vx,vy){
         super(x,y,size,vx,vy);
         this.size = size/2;
-        this.vx = 2*this.vx;
-        this.vy = 2*this.vy;
-        this.type="speedboy";
+        this.vx = this.vx;
+        this.vy = this.vy;
+        this.type="growboy";
         this.color = "purple"
         this.sizeIncrement = 5;
+        this.max_size = 90
     }
     update(){
-        this.size += this.sizeIncrement;
+        if(this.size < this.max_size){
+            this.size += this.sizeIncrement;
+        }
         this.followObject();
         if(this.alive){
             this.x = Math.floor(this.floatingxpos);
@@ -138,7 +141,7 @@ class growBoy extends Enemy{
         }
     }
 }
-let enemytrack = 1;
+let enemytrack = 3;
 //const enemyTypes = ["growBoy","bigBoy","speedBoy"];
 const enemyTypes = [new growBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y),
     new bigBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y),
@@ -154,6 +157,7 @@ const populate = (numberEnemies) => {
         }
         let newEnemy = new Enemy(x,y,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y);
         Enemies.push(newEnemy);
+
     }
     for(let i = 0 ; i < enemytrack;i++){
         let type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
@@ -185,7 +189,7 @@ const enemiesUpdate =() =>{
     //check if dog has hit enemy
     if(Enemies.length == 0){
         enemytrack++;
-        populate(numberEnemies+=5);
+        populate(numberEnemies+=1);
     }
     //add a random enemy
   
@@ -204,7 +208,7 @@ const enemiesUpdate =() =>{
             }
             if(enemy.type == "bigboy"){
                 for(let i = 0 ; i<enemy.special;i++){
-                    let children = new Enemy(enemy.x + BIG_RADIUS ,enemy.y+ BIG_RADIUS,ENEMY_RADIUS,enemy.vx * Math.random(),enemy.vy*Math.random());
+                    let children = new speedBoy(enemy.x + BIG_RADIUS ,enemy.y+ BIG_RADIUS,ENEMY_RADIUS,enemy.vx * Math.random(),enemy.vy*Math.random());
                     children.color="blue";
                     Enemies.push(children);
                     console.log("spawned children");
