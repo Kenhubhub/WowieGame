@@ -3,13 +3,13 @@ let ENEMY_RADIUS = 20;
 let ENEMY_ACC = 1;
 const ENEMY_COLOR = "#ff0000"
 const enemyKilledScore = 100;
-
+let BIG_RADIUS = 60;
 const enemy_velocity = {
     x:2,
     y:2
 }
 class Enemy{
-    constructor(x,y,size,vx,vy,dog){
+    constructor(x,y,size,vx,vy){
         this.x = x;
         this.y= y;
         this.size = size;
@@ -21,12 +21,12 @@ class Enemy{
         this.color = ENEMY_COLOR
         this.floatingxpos = x;
         this.floatingypos = y;
-        
+        this.type = "footsoldier";
     }
     render(){
         
         c.beginPath();
-        c.arc(this.x,this.y,ENEMY_RADIUS,0,2*Math.PI);
+        c.arc(this.x,this.y,this.size,0,2*Math.PI);
         c.fillStyle = this.color;
         c.shadowColor = "#f50000";
         c.shadowBlur = 20;
@@ -95,7 +95,28 @@ class Enemy{
     }
 
 }
+
 let Enemies = [];
+class bigBoy extends Enemy{
+    constructor(x,y,size,vx,vy){
+        super(x,y,size,vx,vy);
+        this.size = BIG_RADIUS;
+        
+        this.type="bigboy";
+        this.special = 5;
+    }
+    update(){
+        this.followObject();
+        if(this.alive){
+            this.x = Math.floor(this.floatingxpos);
+            this.y = Math.floor(this.floatingypos);
+            
+        }
+        
+        
+        
+    }
+}
 const populate = (numberEnemies) => {
     for(let i = 0 ; i< numberEnemies; i++){
         let x = player.x;
@@ -124,7 +145,7 @@ const enemiesRender = () =>{
 let death_particles = []
 let DEPRECATION_FRAMES = 20;
 let deadScore = [];
-
+let bossCount = 0;
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
     if(Enemies.length == 0){
@@ -136,6 +157,21 @@ const enemiesUpdate =() =>{
             death_particles.push(new particles(enemy.x,enemy.y));
             gameEngine.score += enemyKilledScore;
             let score = new Score(enemyKilledScore,enemy.x, enemy.y);
+            bossCount++;
+            if(bossCount == 10){
+                console.log("bigboy added")
+                let newBigboy =new bigBoy(innerWidth/2,innerHeight/2,BIG_RADIUS,enemy.vx,enemy.vy);
+                Enemies.push(newBigboy);
+                bossCount =0;
+            }
+            if(enemy.type == "bigboy"){
+                for(let i = 0 ; i<enemy.special;i++){
+                    let children = new Enemy(enemy.x + BIG_RADIUS ,enemy.y+ BIG_RADIUS,ENEMY_RADIUS,enemy.vx * Math.random(),enemy.vy*Math.random());
+                    children.color="blue";
+                    Enemies.push(children);
+                    console.log("spawned children");
+                }
+            }
             deadScore.push(score);
         }
     })
