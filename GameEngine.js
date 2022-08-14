@@ -30,6 +30,7 @@ class GameEngine {
         powerUps.forEach( powerUp => {
             powerUp.update();
         })
+        boss.draw();
         
         c.font = "30px Arial";
         c.fillStyle = "orange";
