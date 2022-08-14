@@ -166,7 +166,7 @@ class kamikazeBoy extends Enemy{
     }
 
 }
-let enemytrack = 3;
+let enemytrack = 1;
 //const enemyTypes = ["growBoy","bigBoy","speedBoy"];
 const enemyTypes = [new growBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y),
     new bigBoy(Math.random() * innerWidth,y = Math.random() * innerHeight,ENEMY_RADIUS,enemy_velocity.x,enemy_velocity.y),
@@ -184,13 +184,7 @@ const populate = (numberEnemies) => {
         Enemies.push(newEnemy);
 
     }
-    for(let i = 0 ; i < enemytrack;i++){
-        let type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
-        let newEnemy = type;
-        console.log("chimibanga",typeof newEnemy);
-        Enemies.push(newEnemy);
-
-    }
+    
 }
 //renders array of enemies
 const enemiesRender = () =>{
@@ -201,6 +195,14 @@ const enemiesRender = () =>{
             enemy.render();
         }
     })
+}
+const add_newEnemy = (number)=>{
+    for(let i = 0 ; i < enemytrack;i++){
+        let type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+        let newEnemy = type;
+        Enemies.push(newEnemy);
+
+    }
 }
 
 //update
@@ -213,11 +215,11 @@ let bossCount = 0;
 const enemiesUpdate =() =>{
     //check if dog has hit enemy
     if(Enemies.length == 0){
-        enemytrack++;
         populate(numberEnemies+=1);
+        add_newEnemy(enemytrack)
     }
     //add a random enemy
-  
+    
     Enemies.forEach( enemy => {
         enemy.check_collision();
         if(!enemy.alive){
@@ -225,6 +227,10 @@ const enemiesUpdate =() =>{
             gameEngine.score += enemyKilledScore;
             let score = new Score(enemyKilledScore,enemy.x, enemy.y);
             bossCount++;
+            if(bossCount == 5){
+                add_newEnemy(enemytrack);
+                enemytrack++;
+            }
             if(bossCount == 10){
                 console.log("bigboy added")
                 let newBigboy =new bigBoy(innerWidth/2,innerHeight/2,BIG_RADIUS,enemy.vx,enemy.vy);
@@ -266,7 +272,8 @@ const enemiesUpdate =() =>{
     Enemies.forEach( enemy =>{
         if(distance(player.x,player.y,enemy.x,enemy.y) < PLAYER_RADIUS){
             player.alive = false;
-            
+            enemytrack = 0;
+            numberEnemies = 0;
             console.log("Game over bitch");
         }
     })
