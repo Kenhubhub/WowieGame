@@ -32,7 +32,7 @@ class Enemy{
     check_collision(){
         if(distance(dog.x,dog.y,this.x,this.y) < 30){
             this.alive = false;
-            death_animation(this.color,this.x,this.y);
+            
         }
     }
     followObject() {
