@@ -17,6 +17,8 @@ class Enemy{
         this.goalx = player.x;
         this.goaly = player.y;
         this.color = ENEMY_COLOR
+        this.floatingxpos = x;
+        this.floatingypos = y;
         
     }
     render(){
@@ -40,15 +42,26 @@ class Enemy{
       
         this.goalx = player.x;
         this.goaly = player.y;
-        var xdiff = this.x - this.goalx;
-        var ydiff = this.y - this.goaly;
+        var xdiff = Math.abs(this.x - this.goalx);
+        var ydiff = Math.abs(this.y - this.goaly);
+
+        var xratio = 1;
+        var yratio = 1;
+        if(xdiff < ydiff){
+            xratio = xdiff / ydiff;
+        }
+        else if(ydiff < xdiff){
+            yratio = ydiff / xdiff;
+        }
 
         // X
         if (this.goalx > this.x) {
             this.dx = ENEMY_ACC;
+            this.floatingxpos += this.dx*xratio;
         }
         else if (this.goalx < this.x) {
             this.dx = -ENEMY_ACC;
+            this.floatingxpos += this.dx*xratio;
         } else {
             this.dx = 0
          }
@@ -56,9 +69,11 @@ class Enemy{
         // Y
         if (this.goaly > this.y) {
             this.dy = ENEMY_ACC;
+            this.floatingypos += this.dy*yratio;
         }
         else if (this.goaly < this.y) {
             this.dy = -ENEMY_ACC;
+            this.floatingypos += this.dy*yratio;
         } else { 
             this.dy = 0;
         }
@@ -68,8 +83,8 @@ class Enemy{
     update(){
         this.followObject();
         if(this.alive){
-            this.x += this.dx;
-            this.y +=this.dy;
+            this.x = Math.floor(this.floatingxpos);
+            this.y = Math.floor(this.floatingypos);
             
         }
         
