@@ -24,12 +24,20 @@ class GameEngine {
         player.draw();
         stick.update();
         stick.render();
+        grapple.draw();
         enemiesRender();
         enemiesUpdate();
         
         c.font = "30px Arial";
         c.fillStyle = "orange";
         c.fillText("SCORE: "+this.score.toString(), 50,50);
+
+        if (keysDown.SPACE == true) {
+            grapple.grappling = true;
+        } else {
+            grapple.grappling = false
+        }
+
 
         for (let x of deadScore) {
             x.update();
